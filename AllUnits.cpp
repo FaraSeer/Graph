@@ -1,6 +1,8 @@
 
 #include "AllUnits.h"
 
+AllUnits* AllUnits::m_myPtr = NULL;
+
 AllUnits* AllUnits::getPtr()
 {
 	if (m_myPtr == NULL) {
@@ -27,5 +29,13 @@ Unit* AllUnits::getUnitById(int _id)
 	return NULL;
 }
 
-AllUnits* AllUnits::m_myPtr = NULL;
+void AllUnits::clk()
+{
+	for (m_It = m_Units.begin(); m_It != m_Units.end(); ++m_It)
+	{
+		(*m_It)->CLK();
+	}
+}
+
+
 

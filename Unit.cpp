@@ -1,11 +1,12 @@
 
-#include "Unit.h"
 #include "AllUnits.h"
+#include "Unit.h"
 
-Unit::Unit(int _id)
+Unit::Unit(int _id):
+	m_Id(_id)
 {
 	AllUnits::getPtr()->addUnit(this);
+	m_Status = ST_OFF;
 }
 
-int Unit::getId() { return m_Id; }
 

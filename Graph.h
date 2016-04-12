@@ -32,7 +32,9 @@ public:
 
 	void addEdge(Vertex* _v1, Vertex* _v2);
 
-	void BFS(Vertex* _s, bool _needClear = true);
+	void clean();
+	void BFS(Vertex* _s);
+	void DFS(Vertex* _s);
 
 	int findRowNumber(int _id);
 
@@ -47,3 +49,20 @@ private:
 
 	std::queue<Vertex*> m_Queue;
 };
+/*
+class AdjacencyList
+{
+public:
+	AdjacencyList()
+	{
+
+	}
+
+private:
+	static const int MAX_VERTICES = 100;
+	static const int MAX_ADJACENT_VERTICES = 100;
+	Vertex* m_AdjacencyList[MAX_VERTICES][MAX_ADJACENT_VERTICES];
+	int m_Vertices[MAX_VERTICES];
+	int m_nVertices;
+};
+*/

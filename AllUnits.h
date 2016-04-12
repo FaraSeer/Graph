@@ -14,6 +14,7 @@ public:
 
 	Unit* getUnitById(int _id);
 
+	void clk();
 
 private:
 	static AllUnits* m_myPtr;

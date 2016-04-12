@@ -43,18 +43,19 @@ void Graph::addEdge(Vertex* _v1, Vertex* _v2)
 	}
 }
 
-void Graph::BFS(Vertex* _s, bool _needClear)
+void Graph::clean()
 {
-	if (_needClear) {
-		for (int i = 0; i < m_nVertices; i++)
+	for (int i = 0; i < m_nVertices; i++)
+	{
+		for (int j = 0; j < m_Vertices[i]; j++)
 		{
-			for (int j = 0; j < m_Vertices[i]; j++)
-			{
-				m_AdjacencyList[i][j]->setColor(VCWhite);
-			}
+			m_AdjacencyList[i][j]->setColor(VCWhite);
 		}
 	}
+}
 
+void Graph::BFS(Vertex* _s)
+{
 	_s->setColor(VCGray);
 
 	m_Queue.push(_s);
@@ -64,17 +65,33 @@ void Graph::BFS(Vertex* _s, bool _needClear)
 		u = m_Queue.front();
 		m_Queue.pop();
 		int row = findRowNumber(u->getId());
-		printf("#--------\nScanning vertex: %d\n", u->getId());
+		printf("\tScanning vertex: %d\n", u->getId());
 		for (int i = 1; i < m_Vertices[row]; i++)
 		{
 			Vertex* v = m_AdjacencyList[row][i];
 			if (v->getColor() == VCWhite) {
-				printf("Visiting vertex: %d\n", v->getId());
+				printf("\t\tVisiting vertex: %d\n", v->getId());
 				v->setColor(VCGray);
 				m_Queue.push(v);
 			}
 		}
 		u->setColor(VCBlack);
+	}
+}
+
+void Graph::DFS(Vertex* _s)
+{
+	_s->setColor(VCGray);
+	int row = findRowNumber(_s->getId());
+	printf("\tScanning vertex: %d\n", _s->getId());
+	for (int i = 1; i < m_Vertices[row]; i++)
+	{
+		Vertex* v = m_AdjacencyList[row][i];
+		if (v->getColor() == VCWhite) {
+			printf("\t\tVisiting vertex: %d\n", v->getId());
+			DFS(v);
+		}
+		_s->setColor(VCBlack);
 	}
 }
 
